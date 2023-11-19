@@ -15,13 +15,14 @@ const LERP_SPEED = 10.0					# Adjust this value to control the smoothness of mov
 @export var JUMP_VELOCITY = 4.5			# Default = 4.5
 
 # Crouch Variables, we will use walking speed as crouch speed
-var crouchdepth = -0.5 #No animated version variable
-
+var crouch_depth = -0.5 #No animated version variable
 
 @onready var raycast = $CameraController/RayCast3D
 @onready var playercollision = $CollisionShape3D
 @onready var std_collision = $std_collision
+@onready var std_mesh = $std_collision/std_mesh
 @onready var crh_collision = $crh_collision
+@onready var crh_mesh = $crh_collision/crh_mesh
 
 # Camera look and mouse variables
 var mouse_input : bool = false 			# Check mouse movement
@@ -104,9 +105,9 @@ func _jump():
 
 func _crouch(delta): # No animated version
 
-	if Input.is_action_pressed("crouch"):
+	if Input.is_action_pressed("crouch") or raycast.is_colliding():
 		SPEED=WALK_SPEED
-		CAMERA_CONTROLLER.position.y = lerp(CAMERA_CONTROLLER.position.y,1.8 + crouchdepth,delta*LERP_SPEED)
+		CAMERA_CONTROLLER.position.y = lerp(CAMERA_CONTROLLER.position.y,1.8 + crouch_depth,delta*LERP_SPEED)
 		std_collision.disabled=true
 		crh_collision.disabled=false
 	else:
