@@ -40,7 +40,7 @@ metadata/_edit_group_ = true
 shape = SubResource("ConcavePolygonShape3D_j54wf")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(3.023, 0, 0, 0, 0.01, 0, 0, 0, 14.089, 0, 1.53, -10.966)
+transform = Transform3D(3.023, 0, 0, 0, 0.01, 0, 0, 0, 14.089, 0, 1.42956, -8.39411)
 material_override = SubResource("StandardMaterial3D_j58s4")
 mesh = SubResource("BoxMesh_g1yhe")
 metadata/_edit_group_ = true

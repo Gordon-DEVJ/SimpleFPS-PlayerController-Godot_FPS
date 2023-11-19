@@ -7,7 +7,7 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4r48s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n4p4x"]
-height = 1.5
+height = 1.4
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bvfbr"]
 height = 1.5
@@ -25,7 +25,7 @@ visible = false
 mesh = SubResource("CapsuleMesh_4r48s")
 
 [node name="crh_collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("CapsuleShape3D_n4p4x")
 disabled = true
 
@@ -40,4 +40,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.300448, 0)
-target_position = Vector3(0, 1.9, 0)
+target_position = Vector3(0, 1.7, 0)

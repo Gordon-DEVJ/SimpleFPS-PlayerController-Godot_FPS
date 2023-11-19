@@ -15,14 +15,11 @@ const LERP_SPEED = 10.0					# Adjust this value to control the smoothness of mov
 @export var JUMP_VELOCITY = 4.5			# Default = 4.5
 
 # Crouch Variables, we will use walking speed as crouch speed
-var crouch_depth = -0.5 #No animated version variable
-
+var crouch_depth = -0.45
 @onready var raycast = $CameraController/RayCast3D
 @onready var playercollision = $CollisionShape3D
 @onready var std_collision = $std_collision
-@onready var std_mesh = $std_collision/std_mesh
 @onready var crh_collision = $crh_collision
-@onready var crh_mesh = $crh_collision/crh_mesh
 
 # Camera look and mouse variables
 var mouse_input : bool = false 			# Check mouse movement
