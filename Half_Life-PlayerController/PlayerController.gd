@@ -100,8 +100,9 @@ func _jump():
 	if is_on_floor():
 		JUMPS_REMAINING = 0			# Set in 0 for disable double jump
 
-func _crouch(delta): # No animated version
+func _crouch(delta): 
 
+# Handle crouch
 	if Input.is_action_pressed("crouch") or raycast.is_colliding():
 		SPEED=WALK_SPEED
 		CAMERA_CONTROLLER.position.y = lerp(CAMERA_CONTROLLER.position.y,1.8 + crouch_depth,delta*LERP_SPEED)
@@ -123,7 +124,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	_walk()					# Walk Function
-	_crouch(delta)			# Crouch function, add delta in argument for no animated version
+	_crouch(delta)			# Crouch function
 	_jump() 				# Jump function
 
 	# Get the input direction and handle the movement/deceleration.
