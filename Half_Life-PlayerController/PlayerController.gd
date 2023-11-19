@@ -17,7 +17,7 @@ var JUMPS_REMAINING = 1					# For Double Jump
 @export var JUMP_VELOCITY = 4.5			# Default = 4.5
 
 # Crouch Variables 
-var crouch_depth = -0.45
+var crouch_depth = -0.5
 @onready var raycast = $CameraController/RayCast3D
 @onready var std_collision = $std_collision
 @onready var crh_collision = $crh_collision
