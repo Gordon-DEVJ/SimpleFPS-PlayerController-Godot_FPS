@@ -10,15 +10,18 @@ var JUMPS_REMAINING = 1					# For Double Jump
 var DIRECTION = Vector3.ZERO			# Direction
 const LERP_SPEED = 10.0					# Adjust this value to control the smoothness of movement transitions.
 	# Export Variables
-@export var BASE_SPEED = 5				# Default = 5		The default movement speed, used when not in the "walk" mode.
+@export var BASE_SPEED = 10				# Default = 5		The default movement speed, used when not in the "walk" mode.
 @export var WALK_SPEED = 2.5			# Default = 2.5		The speed of movement when walking, used when in "walk" mode.
 @export var JUMP_VELOCITY = 4.5			# Default = 4.5
 
 # Crouch Variables, we will use walking speed as crouch speed
-var defaultheight = 2.0
-var crouchheight = 1.4
+var crouchdepth = -0.5 #No animated version variable
+
+
 @onready var raycast = $CameraController/RayCast3D
 @onready var playercollision = $CollisionShape3D
+@onready var std_collision = $std_collision
+@onready var crh_collision = $crh_collision
 
 # Camera look and mouse variables
 var mouse_input : bool = false 			# Check mouse movement
@@ -99,21 +102,18 @@ func _jump():
 	if is_on_floor():
 		JUMPS_REMAINING = 0			# Set in 0 for disable double jump
 
-func _crouch(delta):
-	# Handle Crouch
-	var raycol = false
-	if raycast.is_colliding():
-		raycol = true
-	if raycol:
-		playercollision.shape.height -= WALK_SPEED*delta
-	elif not raycol:
-		playercollision.shape.height += WALK_SPEED*delta
-	playercollision.shape.height =  clamp(playercollision.shape.height, crouchheight,defaultheight)
+func _crouch(delta): # No animated version
+
 	if Input.is_action_pressed("crouch"):
-		SPEED = WALK_SPEED
-		playercollision.shape.height -= WALK_SPEED*delta
-	elif not raycol:
-		playercollision.shape.height += WALK_SPEED*delta
+		SPEED=WALK_SPEED
+		CAMERA_CONTROLLER.position.y = lerp(CAMERA_CONTROLLER.position.y,1.8 + crouchdepth,delta*LERP_SPEED)
+		std_collision.disabled=true
+		crh_collision.disabled=false
+	else:
+		CAMERA_CONTROLLER.position.y=lerp(CAMERA_CONTROLLER.position.y,1.8,delta*LERP_SPEED)
+		SPEED=BASE_SPEED
+		std_collision.disabled=false
+		crh_collision.disabled=true
 
 func _physics_process(delta):
 	
@@ -125,7 +125,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	_walk()					# Walk Function
-	_crouch(delta)			# Crouch function
+	_crouch(delta)			# Crouch function, add delta in argument for no animated version
 	_jump() 				# Jump function
 
 	# Get the input direction and handle the movement/deceleration.

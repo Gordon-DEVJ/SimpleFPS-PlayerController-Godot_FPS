@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://7rwa47xsk8m2"]
+[gd_scene load_steps=6 format=3 uid="uid://7rwa47xsk8m2"]
 
 [ext_resource type="Script" path="res://PlayerController.gd" id="1_r13wb"]
 
@@ -6,21 +6,37 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4r48s"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n4p4x"]
+height = 1.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bvfbr"]
+height = 1.5
+
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER")]
 script = ExtResource("1_r13wb")
 CAMERA_CONTROLLER = NodePath("CameraController/Camera3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="std_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_rbo2t")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+[node name="std_mesh" type="MeshInstance3D" parent="std_collision"]
+visible = false
 mesh = SubResource("CapsuleMesh_4r48s")
+
+[node name="crh_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_n4p4x")
+disabled = true
+
+[node name="crh_mesh" type="MeshInstance3D" parent="crh_collision"]
+visible = false
+mesh = SubResource("CapsuleMesh_bvfbr")
 
 [node name="CameraController" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 2.65855)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 2, 0)
