@@ -7,9 +7,10 @@ extends CharacterBody3D
 # Walk and Speed variables
 var SPEED = BASE_SPEED					# Movement Speed
 var DIRECTION = Vector3.ZERO			# Direction
-const LERP_SPEED = 10.0					# Adjust this value to control the smoothness of movement transitions.
-@export var BASE_SPEED = 10.0				# Default = 5		The default movement speed, used when not in the "walk" mode.
+const LERP_SPEED = 10.0					# Adjust this value to control the smoothness transitions.
+@export var BASE_SPEED = 7.5			# Default = 5		The default movement speed, used when not in the "walk" mode.
 @export var WALK_SPEED = 2.5			# Default = 2.5		The speed of movement when walking, used when in "walk" mode.
+@export var CROUCH_SPEED = 2.0			# Default = 2
 
 #Jump variables
 var JUMPS_REMAINING = 1					# For Double Jump
@@ -106,7 +107,7 @@ func _crouch(delta):
 
 # Handle crouch
 	if Input.is_action_pressed("crouch") or raycast.is_colliding():
-		SPEED=WALK_SPEED
+		SPEED=CROUCH_SPEED
 		CAMERA_CONTROLLER.position.y = lerp(CAMERA_CONTROLLER.position.y,1.8 + crouch_depth,delta*LERP_SPEED)
 		std_collision.disabled=true
 		crh_collision.disabled=false
