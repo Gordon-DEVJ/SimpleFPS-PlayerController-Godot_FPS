@@ -18,7 +18,7 @@ var JUMPS_REMAINING = 1					# For Double Jump
 
 # Crouch Variables 
 var crouch_depth = -0.5
-@onready var raycast = $CameraController/RayCast3D
+@onready var raycast = $RayCast3D
 @onready var std_collision = $std_collision
 @onready var crh_collision = $crh_collision
 
@@ -107,10 +107,11 @@ func _crouch(delta):
 
 # Handle crouch
 	if Input.is_action_pressed("crouch") or raycast.is_colliding():
-		SPEED=CROUCH_SPEED
-		CAMERA_CONTROLLER.position.y = lerp(CAMERA_CONTROLLER.position.y,1.8 + crouch_depth,delta*LERP_SPEED)
-		std_collision.disabled=true
-		crh_collision.disabled=false
+		if is_on_floor():
+			SPEED=CROUCH_SPEED
+			CAMERA_CONTROLLER.position.y = lerp(CAMERA_CONTROLLER.position.y,1.8 + crouch_depth,delta*LERP_SPEED)
+			std_collision.disabled=true
+			crh_collision.disabled=false
 	else:
 		CAMERA_CONTROLLER.position.y=lerp(CAMERA_CONTROLLER.position.y,1.8,delta*LERP_SPEED)
 		std_collision.disabled=false

@@ -38,6 +38,6 @@ mesh = SubResource("CapsuleMesh_bvfbr")
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
-[node name="RayCast3D" type="RayCast3D" parent="CameraController"]
+[node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.300448, 0)
 target_position = Vector3(0, 1.7, 0)

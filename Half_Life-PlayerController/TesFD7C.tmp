@@ -29,6 +29,13 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 environment = SubResource("Environment_t252q")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_xsbja")]
+BASE_SPEED = null
+WALK_SPEED = null
+CROUCH_SPEED = null
+JUMP_VELOCITY = null
+MOUSE_SENSITIVITY = null
+TILT_UPPER_LIMIT = null
+TILT_LOWER_LIMIT = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(52.542, 0, 0, 0, 2.68748, 0, 0, 0, 53.7496, 0, -1.32412, 0)
