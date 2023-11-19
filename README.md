@@ -1,4 +1,4 @@
-# Half_Life-PlayerController Godot Engine
+# Half_Life-PlayerController Godot Engine v1.0.2
 PlayerController inspired by Half Life movement for Godot Engine
 This is a 3D movement system for Godot Engine inspired by the movement mechanics found in the Half-Life games developed by Valve.
 
@@ -37,6 +37,7 @@ You can customize the movement behavior by adjusting the exported variables in t
 
 1.0.1        Improvements in the environment
 
+1.0.2        Crouching function added
 ## License Agreement
 
 Copyright (c) 2023 Gordon-DEVJ
