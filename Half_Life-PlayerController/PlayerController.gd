@@ -14,6 +14,12 @@ const LERP_SPEED = 10.0					# Adjust this value to control the smoothness of mov
 @export var WALK_SPEED = 2.5			# Default = 2.5		The speed of movement when walking, used when in "walk" mode.
 @export var JUMP_VELOCITY = 4.5			# Default = 4.5
 
+# Crouch Variables, we will use walking speed as crouch speed
+var defaultheight = 2.0
+var crouchheight = 1.4
+@onready var raycast = $CameraController/RayCast3D
+@onready var playercollision = $CollisionShape3D
+
 # Camera look and mouse variables
 var mouse_input : bool = false 			# Check mouse movement
 var rotation_input : float				# Rotation in X
@@ -74,6 +80,18 @@ func _ready():
 	# Get mouse input mode
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+func _jump():
+
+# Handle Double Jump.
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or JUMPS_REMAINING > 0):
+		if is_on_floor():
+			velocity.y = JUMP_VELOCITY
+		else:
+			velocity.y = JUMP_VELOCITY * 0.8
+			JUMPS_REMAINING -= 1
+	if is_on_floor():
+		JUMPS_REMAINING = 0			# Set in 0 for disable double jump
+
 func _physics_process(delta):
 	
 	# Camera update
@@ -89,15 +107,31 @@ func _physics_process(delta):
 	else:
 		SPEED = BASE_SPEED
 
+	# Handle Crouch
+	var raycol = false
+	if raycast.is_colliding():
+		raycol = true
+	if raycol:
+		playercollision.shape.height -= WALK_SPEED*delta
+	elif not raycol:
+		playercollision.shape.height += WALK_SPEED*delta
+	playercollision.shape.height =  clamp(playercollision.shape.height, crouchheight,defaultheight)
+	if Input.is_action_pressed("crouch"):
+		SPEED = WALK_SPEED
+		playercollision.shape.height -= WALK_SPEED*delta
+	elif not raycol:
+		playercollision.shape.height += WALK_SPEED*delta
+	
+	_jump()
 	# Handle Double Jump.
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or JUMPS_REMAINING > 0):
+	"""if Input.is_action_just_pressed("jump") and (is_on_floor() or JUMPS_REMAINING > 0):
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 		else:
 			velocity.y = JUMP_VELOCITY * 0.8
 			JUMPS_REMAINING -= 1
 	if is_on_floor():
-		JUMPS_REMAINING = 0			# Set in 0 for disable double jump
+		JUMPS_REMAINING = 0		"""	# Set in 0 for disable double jump"""
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.

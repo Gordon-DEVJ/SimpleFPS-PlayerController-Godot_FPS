@@ -39,6 +39,17 @@ metadata/_edit_group_ = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_j54wf")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.978, 0, 0, 0, 0.05, 0, 0, 0, 1, 0, 1.75731, -1.52752)
+material_override = SubResource("StandardMaterial3D_j58s4")
+mesh = SubResource("BoxMesh_g1yhe")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_j54wf")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.557209, 0.830372, 0, -0.830372, 0.557209, 0, 0, 0)
 shadow_enabled = true

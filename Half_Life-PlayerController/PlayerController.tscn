@@ -20,4 +20,7 @@ mesh = SubResource("CapsuleMesh_4r48s")
 [node name="CameraController" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 2.65855)
+
+[node name="RayCast3D" type="RayCast3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 2, 0)
