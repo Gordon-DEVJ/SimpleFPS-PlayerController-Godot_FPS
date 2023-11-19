@@ -37,6 +37,7 @@ You can customize the movement behavior by adjusting the exported variables in t
 
 1.0.1        Improvements in the environment
 
+1.0.2        Crouching function added
 ## License Agreement
 
 Copyright (c) 2023 Gordon-DEVJ
