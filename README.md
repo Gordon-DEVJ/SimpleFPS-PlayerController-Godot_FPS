@@ -34,6 +34,7 @@ You can customize the movement behavior by adjusting the exported variables in t
 ## Versions
 
 1.0.0        Walk, Jump, Camera controls 
+
 1.0.1        Improvements in the environment
 
 ## License Agreement
