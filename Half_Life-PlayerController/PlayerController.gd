@@ -82,16 +82,13 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _walk():
+
 	# Handle Walk mode
 	if Input.is_action_pressed("walk") and is_on_floor():
 		SPEED = WALK_SPEED
-		print("camina")
-		print(is_on_floor())
-		
 	else:
 		SPEED = BASE_SPEED
-		print("corre")
-		print(is_on_floor())
+
 
 func _jump():
 
