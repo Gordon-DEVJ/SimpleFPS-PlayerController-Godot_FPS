@@ -4,20 +4,20 @@ extends CharacterBody3D
 # Movement insipired in Half Life games ( VALVE )
 #===============================================================================
 
-# Walk, Speed and Jump variables
+# Walk and Speed variables
 var SPEED = BASE_SPEED					# Movement Speed
-var JUMPS_REMAINING = 1					# For Double Jump
 var DIRECTION = Vector3.ZERO			# Direction
 const LERP_SPEED = 10.0					# Adjust this value to control the smoothness of movement transitions.
-	# Export Variables
 @export var BASE_SPEED = 10				# Default = 5		The default movement speed, used when not in the "walk" mode.
 @export var WALK_SPEED = 2.5			# Default = 2.5		The speed of movement when walking, used when in "walk" mode.
+
+#Jump variables
+var JUMPS_REMAINING = 1					# For Double Jump
 @export var JUMP_VELOCITY = 4.5			# Default = 4.5
 
-# Crouch Variables, we will use walking speed as crouch speed
+# Crouch Variables 
 var crouch_depth = -0.45
 @onready var raycast = $CameraController/RayCast3D
-@onready var playercollision = $CollisionShape3D
 @onready var std_collision = $std_collision
 @onready var crh_collision = $crh_collision
 
