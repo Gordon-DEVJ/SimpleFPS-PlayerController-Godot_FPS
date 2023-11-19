@@ -124,15 +124,9 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	# Handle Walk mode
-	if Input.is_action_pressed("walk") and is_on_floor():
-		SPEED = WALK_SPEED
-	else:
-		SPEED = BASE_SPEED
-
-	_walk()				# Walk Function
-	_crouch(delta)		# Crouch function
-	_jump() 			# Jump function
+	_walk()					# Walk Function
+	_crouch(delta)			# Crouch function
+	_jump() 				# Jump function
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
