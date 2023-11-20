@@ -90,7 +90,6 @@ func _walk():
 	else:
 		SPEED = BASE_SPEED
 
-
 func _jump():
 
 # Handle Double Jump.
