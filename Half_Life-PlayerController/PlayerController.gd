@@ -8,7 +8,7 @@ extends CharacterBody3D
 var SPEED = BASE_SPEED					# Movement Speed
 var DIRECTION = Vector3.ZERO			# Direction
 const LERP_SPEED = 10.0					# Adjust this value to control the smoothness transitions.
-@export var BASE_SPEED = 7.5			# Default = 5		The default movement speed, used when not in the "walk" mode.
+@export var BASE_SPEED = 5.0			# Default = 5		The default movement speed, used when not in the "walk" mode.
 @export var WALK_SPEED = 2.5			# Default = 2.5		The speed of movement when walking, used when in "walk" mode.
 @export var CROUCH_SPEED = 2.0			# Default = 2
 
@@ -105,15 +105,16 @@ func _jump():
 func _crouch(delta): 
 
 # Handle crouch
-	if Input.is_action_pressed("crouch") or raycast.is_colliding():
-		SPEED=CROUCH_SPEED
-		CAMERA_CONTROLLER.position.y = lerp(CAMERA_CONTROLLER.position.y,1.8 + crouch_depth,delta*LERP_SPEED)
-		std_collision.disabled=true
-		crh_collision.disabled=false
-	else:
-		CAMERA_CONTROLLER.position.y=lerp(CAMERA_CONTROLLER.position.y,1.8,delta*LERP_SPEED)
-		std_collision.disabled=false
-		crh_collision.disabled=true
+	if is_on_floor():
+		if Input.is_action_pressed("crouch") or raycast.is_colliding():
+			SPEED=CROUCH_SPEED
+			CAMERA_CONTROLLER.position.y = lerp(CAMERA_CONTROLLER.position.y,1.8 + crouch_depth,delta*LERP_SPEED)
+			std_collision.disabled=true
+			crh_collision.disabled=false
+		else:
+			CAMERA_CONTROLLER.position.y=lerp(CAMERA_CONTROLLER.position.y,1.8,delta*LERP_SPEED)
+			std_collision.disabled=false
+			crh_collision.disabled=true
 
 func _physics_process(delta):
 	
